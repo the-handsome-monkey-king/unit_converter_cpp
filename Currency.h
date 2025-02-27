@@ -30,15 +30,21 @@
 #include <map>
 
 // Currency symbols
-enum class CurrencyIndex {
+enum class CurrencyUnits {
   CAD, USD, EUR, JPY, GBP,
   AUD, CHF, CNY, SEK, NZD};
 
 class Currency {
   private:
-    CurrencyIndex type;
+    // currently set currency type
+    CurrencyUnits units;
+    // whole and decimal value
+    int value, subvalue;
   public:
-    Currency(CurrencyIndex type, int value, int subvalue) {};
+    // any currency but JPY cannot have decimal
+    Currency(CurrencyUnits units, int value, int subvalue);
+    // any currency, sets subvalue to zero
+    Currency(CurrencyUnits units, int value);
     std::string stub();
 };
 
