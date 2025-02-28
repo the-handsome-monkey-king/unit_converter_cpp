@@ -11,17 +11,8 @@
     volume
     mass
 
-  Currencies:
-    CAD
-    USD
-    EUR
-    JPY
-    GBP
-    AUD
-    CHF
-    CNY
-    SEK
-    NZD
+  Currencies: CAD, USD, EUR, JPY
+    GBP, AUD, CHF, CNY, SEK, NZD
 
 
 *********************/
