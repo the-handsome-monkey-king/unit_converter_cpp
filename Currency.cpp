@@ -51,7 +51,7 @@ const std::map<CurrencyUnits, double> Currency::CADexchange = {
   {CurrencyUnits::SEK, 7.12}, 
   {CurrencyUnits::NZD, 1.14}}; 
 // USD to X
-static const std::map<CurrencyUnits, double> USDexchange = {
+const std::map<CurrencyUnits, double> Currency::USDexchange = {
   {CurrencyUnits::CAD, 1.31}, 
   {CurrencyUnits::USD, 1.0}, 
   {CurrencyUnits::EUR, 0.89}, 
@@ -63,7 +63,7 @@ static const std::map<CurrencyUnits, double> USDexchange = {
   {CurrencyUnits::SEK, 9.31}, 
   {CurrencyUnits::NZD, 1.49}}; 
 // EUR to X
-static const std::map<CurrencyUnits, double> EURexchange = {
+const std::map<CurrencyUnits, double> Currency::EURexchange = {
   {CurrencyUnits::CAD, 1.48}, 
   {CurrencyUnits::USD, 1.13}, 
   {CurrencyUnits::EUR, 1.0}, 
@@ -75,7 +75,7 @@ static const std::map<CurrencyUnits, double> EURexchange = {
   {CurrencyUnits::SEK, 10.51}, 
   {CurrencyUnits::NZD, 1.68}}; 
 // JPY to X
-static const std::map<CurrencyUnits, double> JPYexchange = {
+const std::map<CurrencyUnits, double> Currency::JPYexchange = {
   {CurrencyUnits::CAD, 0.012}, 
   {CurrencyUnits::USD, 0.0093}, 
   {CurrencyUnits::EUR, 0.0082}, 
@@ -87,7 +87,7 @@ static const std::map<CurrencyUnits, double> JPYexchange = {
   {CurrencyUnits::SEK, 0.086}, 
   {CurrencyUnits::NZD, 0.014}}; 
 // GBP to X
-static const std::map<CurrencyUnits, double> GBPexchange = {
+const std::map<CurrencyUnits, double> Currency::GBPexchange = {
   {CurrencyUnits::CAD, 1.64}, 
   {CurrencyUnits::USD, 1.26}, 
   {CurrencyUnits::EUR, 1.11}, 
@@ -99,7 +99,7 @@ static const std::map<CurrencyUnits, double> GBPexchange = {
   {CurrencyUnits::SEK, 11.7}, 
   {CurrencyUnits::NZD, 1.87}}; 
 // AUD to X
-static const std::map<CurrencyUnits, double> AUDexchange = {
+const std::map<CurrencyUnits, double> Currency::AUDexchange = {
   {CurrencyUnits::CAD, 0.92}, 
   {CurrencyUnits::USD, 0.7}, 
   {CurrencyUnits::EUR, 0.62}, 
@@ -111,7 +111,7 @@ static const std::map<CurrencyUnits, double> AUDexchange = {
   {CurrencyUnits::SEK, 6.55}, 
   {CurrencyUnits::NZD, 1.05}}; 
 // CHF to X
-static const std::map<CurrencyUnits, double> CHFexchange = {
+const std::map<CurrencyUnits, double> Currency::CHFexchange = {
   {CurrencyUnits::CAD, 1.33}, 
   {CurrencyUnits::USD, 1.01}, 
   {CurrencyUnits::EUR, 0.9}, 
@@ -123,7 +123,7 @@ static const std::map<CurrencyUnits, double> CHFexchange = {
   {CurrencyUnits::SEK, 9.44}, 
   {CurrencyUnits::NZD, 1.51}}; 
 // CNY to X
-static const std::map<CurrencyUnits, double> CNYexchange = {
+const std::map<CurrencyUnits, double> Currency::CNYexchange = {
   {CurrencyUnits::CAD, 0.19}, 
   {CurrencyUnits::USD, 0.15}, 
   {CurrencyUnits::EUR, 0.13}, 
@@ -135,7 +135,7 @@ static const std::map<CurrencyUnits, double> CNYexchange = {
   {CurrencyUnits::SEK, 1.35}, 
   {CurrencyUnits::NZD, 0.22}}; 
 // SEK to X
-static const std::map<CurrencyUnits, double> SEKexchange = {
+const std::map<CurrencyUnits, double> Currency::SEKexchange = {
   {CurrencyUnits::CAD, 0.14}, 
   {CurrencyUnits::USD, 0.11}, 
   {CurrencyUnits::EUR, 0.095}, 
@@ -147,7 +147,7 @@ static const std::map<CurrencyUnits, double> SEKexchange = {
   {CurrencyUnits::SEK, 1.0}, 
   {CurrencyUnits::NZD, 0.16}}; 
 // NZD to X
-static const std::map<CurrencyUnits, double> NZDexchange = {
+const std::map<CurrencyUnits, double> Currency::NZDexchange = {
   {CurrencyUnits::CAD, 0.88}, 
   {CurrencyUnits::USD, 0.67}, 
   {CurrencyUnits::EUR, 0.59}, 
@@ -159,7 +159,18 @@ static const std::map<CurrencyUnits, double> NZDexchange = {
   {CurrencyUnits::SEK, 4.62}, 
   {CurrencyUnits::NZD, 1.0}}; 
 
-    
+const std::map<CurrencyUnits,
+  const std::map<CurrencyUnits, double>> EXCHANGE = {
+    { CurrencyUnits::CAD, Currency::CADexchange},
+    { CurrencyUnits::USD, Currency::USDexchange},
+    { CurrencyUnits::EUR, Currency::EURexchange},
+    { CurrencyUnits::JPY, Currency::JPYexchange},
+    { CurrencyUnits::GBP, Currency::GBPexchange},
+    { CurrencyUnits::AUD, Currency::AUDexchange},
+    { CurrencyUnits::CHF, Currency::CHFexchange},
+    { CurrencyUnits::CNY, Currency::CNYexchange},
+    { CurrencyUnits::SEK, Currency::SEKexchange},
+    { CurrencyUnits::NZD, Currency::NZDexchange}};
 
 // constructor
 Currency::Currency(CurrencyUnits units, double value) {

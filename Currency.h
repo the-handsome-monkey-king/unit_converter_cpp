@@ -75,9 +75,9 @@ class Currency {
     *   First map key    = FROM currency
     *   Nested map key   = TO currency
     *   Nested map value = exchange rage
+    */
     static const std::map<CurrencyUnits,
       const std::map<CurrencyUnits, double>> EXCHANGE;
-    */
 
     // constructors
     Currency(CurrencyUnits units, double value);
