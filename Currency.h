@@ -45,22 +45,22 @@ class Currency {
     bool negative;
     // whole and decimal value
     int value, decimal;
-    const static std::map<CurrencyUnits, std::string> currencyName;
+    static const std::map<CurrencyUnits, std::string> currencyName;
 
-/*
-  const static std::map<CurrencyUnits, std::string> currencyName = {
-    {CurrencyUnits::CAD, "CAD"},
-    {CurrencyUnits::USD, "USD"},
-    {CurrencyUnits::EUR, "EUR"},
-    {CurrencyUnits::JPY, "JPY"},
-    {CurrencyUnits::GBP, "GBP"},
-    {CurrencyUnits::AUD, "AUD"},
-    {CurrencyUnits::CHF, "CHF"},
-    {CurrencyUnits::CNY, "CNY"},
-    {CurrencyUnits::SEK, "SEK"},
-    {CurrencyUnits::NZD, "NZD"}
-  };
-  */
+    /*
+    const static std::map<CurrencyUnits, std::string> currencyName = {
+      {CurrencyUnits::CAD, "CAD"},
+      {CurrencyUnits::USD, "USD"},
+      {CurrencyUnits::EUR, "EUR"},
+      {CurrencyUnits::JPY, "JPY"},
+      {CurrencyUnits::GBP, "GBP"},
+      {CurrencyUnits::AUD, "AUD"},
+      {CurrencyUnits::CHF, "CHF"},
+      {CurrencyUnits::CNY, "CNY"},
+      {CurrencyUnits::SEK, "SEK"},
+      {CurrencyUnits::NZD, "NZD"}
+    };
+    */
 
   public:
     // constructors

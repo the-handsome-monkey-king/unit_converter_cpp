@@ -13,6 +13,18 @@
 #include <stdexcept>
 #include "Currency.h"
 
+static const std::map<CurrencyUnits, std::string> currencyNames = {
+  {CurrencyUnits::CAD, "CAD"},
+  {CurrencyUnits::USD, "USD"},
+  {CurrencyUnits::EUR, "EUR"},
+  {CurrencyUnits::JPY, "JPY"},
+  {CurrencyUnits::GBP, "GBP"},
+  {CurrencyUnits::AUD, "AUD"},
+  {CurrencyUnits::CHF, "CHF"},
+  {CurrencyUnits::CNY, "CNY"},
+  {CurrencyUnits::SEK, "SEK"},
+  {CurrencyUnits::NZD, "NZD"}};
+  
 // constructor
 Currency::Currency(CurrencyUnits units, double value) {
   this->units = units;
