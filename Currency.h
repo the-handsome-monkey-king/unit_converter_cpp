@@ -45,24 +45,11 @@ class Currency {
     bool negative;
     // whole and decimal value
     int value, decimal;
-    static const std::map<CurrencyUnits, std::string> currencyName;
-
-    /*
-    const static std::map<CurrencyUnits, std::string> currencyName = {
-      {CurrencyUnits::CAD, "CAD"},
-      {CurrencyUnits::USD, "USD"},
-      {CurrencyUnits::EUR, "EUR"},
-      {CurrencyUnits::JPY, "JPY"},
-      {CurrencyUnits::GBP, "GBP"},
-      {CurrencyUnits::AUD, "AUD"},
-      {CurrencyUnits::CHF, "CHF"},
-      {CurrencyUnits::CNY, "CNY"},
-      {CurrencyUnits::SEK, "SEK"},
-      {CurrencyUnits::NZD, "NZD"}
-    };
-    */
 
   public:
+    // currency units as strings
+    static const std::map<CurrencyUnits, std::string> currencyName;
+
     // constructors
     Currency(CurrencyUnits units, double value);
 
@@ -70,8 +57,9 @@ class Currency {
     friend std::ostream& operator<<(std::ostream& os,
       const Currency& c);
 
-    // a stub function
-    std::string stub();
+    // getters
+    CurrencyUnits getCurrencyUnits();
+
 };
 
 #endif

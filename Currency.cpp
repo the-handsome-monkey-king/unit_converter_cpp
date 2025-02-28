@@ -13,7 +13,7 @@
 #include <stdexcept>
 #include "Currency.h"
 
-static const std::map<CurrencyUnits, std::string> currencyNames = {
+const std::map<CurrencyUnits, std::string> Currency::currencyName = {
   {CurrencyUnits::CAD, "CAD"},
   {CurrencyUnits::USD, "USD"},
   {CurrencyUnits::EUR, "EUR"},
@@ -55,17 +55,25 @@ Currency::Currency(CurrencyUnits units, double value) {
 
 std::ostream& operator<<(std::ostream& os,
   const Currency& c) {
+    // using find to preserve const c refernce
+    std::string cn = Currency::currencyName.find(c.units)->second;
+    os << cn << " ";
+
+    // negative if present
     if(c.negative) { os << "-"; }
 
-    // add symbols
+    // value
+    os << c.value;
 
-    os << c.value << "." << c.decimal;
-    if(c.decimal < 10) { os << "0";}
+    // JPY has no decimal
+    if (c.units != CurrencyUnits::JPY) {
+      os << "." << c.decimal;
+      if(c.decimal < 10) { os << "0";}
+    }
 
     return os;
 }
 
-// a stub class
-std::string Currency::stub() {
-  return "stub";
+CurrencyUnits Currency::getCurrencyUnits() {
+  return this->units;
 }
