@@ -161,7 +161,7 @@ const std::map<CurrencyUnits, double> Currency::NZDexchange = {
   {CurrencyUnits::NZD, 1.0}}; 
 
 const std::map<CurrencyUnits,
-  const std::map<CurrencyUnits, double>> EXCHANGE = {
+  const std::map<CurrencyUnits, double>> Currency::Exchange = {
     { CurrencyUnits::CAD, Currency::CADexchange},
     { CurrencyUnits::USD, Currency::USDexchange},
     { CurrencyUnits::EUR, Currency::EURexchange},
@@ -203,7 +203,7 @@ double Currency::getAmountAsDouble() {
   return d;
 }
 
-const std::string Currency::getString() {
+std::string Currency::getString() {
   std::stringstream ss;
 
   ss << Currency::currencyName.find(this->units)->second;
@@ -251,5 +251,11 @@ std::ostream& operator<<(std::ostream& os,
 
     os << std::endl;
     return os;
+}
+
+double Currency::getExchangeRate(
+  CurrencyUnits from, CurrencyUnits to) {
+  double d = Currency::Exchange.at(from).at(from);
+  return d;
 }
 

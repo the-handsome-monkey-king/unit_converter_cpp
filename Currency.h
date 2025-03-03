@@ -74,24 +74,27 @@ class Currency {
     *   Nested map key   = TO currency
     *   Nested map value = exchange rage
     */
+    
+    // figuring out how to call is isn't working out well
     static const std::map<CurrencyUnits,
-      const std::map<CurrencyUnits, double>> EXCHANGE;
+      const std::map<CurrencyUnits, double>> Exchange;
 
     // constructors
     Currency(CurrencyUnits units, double value);
 
 
     // GETTERS
-
     CurrencyUnits getCurrencyUnits();
-
     double getAmountAsDouble();
-
-    const std::string getString();
+    std::string getString();
 
     // extractor
     friend std::ostream& operator<<(std::ostream& os,
       const Currency& c);
+
+    // try a map
+    double getExchangeRate(
+      CurrencyUnits from, CurrencyUnits to);
 };
 
 #endif
