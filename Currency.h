@@ -80,12 +80,18 @@ class Currency {
     // constructors
     Currency(CurrencyUnits units, double value);
 
+
+    // GETTERS
+
+    CurrencyUnits getCurrencyUnits();
+
+    double getAmountAsDouble();
+
+    const std::string getString();
+
     // extractor
     friend std::ostream& operator<<(std::ostream& os,
       const Currency& c);
-    // getters
-    CurrencyUnits getCurrencyUnits();
-
 };
 
 #endif

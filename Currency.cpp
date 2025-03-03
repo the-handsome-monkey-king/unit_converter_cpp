@@ -20,6 +20,7 @@ NZD
 **********************************/
 
 #include <string>
+#include <sstream>
 #include <stdexcept>
 #include "Currency.h"
 
@@ -187,6 +188,45 @@ Currency::Currency(CurrencyUnits units, double value) {
   this->amt = temp;
 }
 
+CurrencyUnits Currency::getCurrencyUnits() {
+  return this->units;
+}
+
+double Currency::getAmountAsDouble() {
+  double d = static_cast<double>(this->amt);
+
+  // JPY has no decimal
+  if (this->units != CurrencyUnits::JPY) {
+    d /= 100;
+  }
+
+  return d;
+}
+
+const std::string Currency::getString() {
+  std::stringstream ss;
+
+  ss << Currency::currencyName.find(this->units)->second;
+  ss << " ";
+
+  // JPY has no decimal
+  if (this->units == CurrencyUnits::JPY) {
+    ss << this->amt;
+  } else {
+    ss << (this->amt / 100);
+    ss << ".";
+    long temp = this->amt % 100;
+    ss << temp;
+    // add extra 0 if needed
+    if (temp < 9) {
+      ss << "0";
+    }
+      
+  }
+
+  return ss.str();
+}
+
 std::ostream& operator<<(std::ostream& os,
   const Currency& c) {
     // get units as string
@@ -210,10 +250,6 @@ std::ostream& operator<<(std::ostream& os,
     }
 
     os << std::endl;
-
     return os;
 }
 
-CurrencyUnits Currency::getCurrencyUnits() {
-  return this->units;
-}
