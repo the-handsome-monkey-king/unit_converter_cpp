@@ -176,46 +176,40 @@ const std::map<CurrencyUnits,
 Currency::Currency(CurrencyUnits units, double value) {
   this->units = units;
 
-  // initialize negative
-  this->negative = false;
+  // acquire truncated whole currency + any deimcal value
+  long temp = static_cast<long>(value * 100);
 
-  // if negative, store and work with positive digits
-  if(value < 0) { 
-    this->negative = true;
-    value *= -1;
-  } 
-
-  // truncates any value below two decimal places
-  int temp_value = static_cast<int>(value * 100);
-  // store whole currency values
-  this->value = temp_value / 100;
-
-  // store decinal value to two places
-  this->decimal = temp_value % 100;
-
-  // this currency is JPY, drop any decimal
-  if(this->units == CurrencyUnits::JPY) {
-    this->decimal = 0;
+  // JPY has no decimal value
+  if (units == CurrencyUnits::JPY) {
+    temp /= 100;
   }
+
+  this->amt = temp;
 }
 
 std::ostream& operator<<(std::ostream& os,
   const Currency& c) {
-    // using find to preserve const c refernce
+    // get units as string
+    // use find() to preserve const Currency reference
     std::string cn = Currency::currencyName.find(c.units)->second;
     os << cn << " ";
 
-    // negative if present
-    if(c.negative) { os << "-"; }
-
-    // value
-    os << c.value;
-
     // JPY has no decimal
-    if (c.units != CurrencyUnits::JPY) {
-      os << "." << c.decimal;
-      if(c.decimal < 10) { os << "0";}
+    if (c.units == CurrencyUnits::JPY) {
+      os << c.amt;
+    } else {
+      os << (c.amt / 100);
+      os << ".";
+      long temp = c.amt % 100;
+      os << temp;
+      // add extra 0 if needed
+      if (temp < 9) {
+        os << "0";
+      }
+        
     }
+
+    os << std::endl;
 
     return os;
 }

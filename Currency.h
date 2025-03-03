@@ -38,10 +38,8 @@ class Currency {
   private:
     // currently set currency type
     CurrencyUnits units;
-    // store negative as independent value
-    bool negative;
-    // whole and decimal value
-    int value, decimal;
+    // currency as whole units only
+    long amt;
 
   public:
     // currency units as strings
@@ -85,7 +83,6 @@ class Currency {
     // extractor
     friend std::ostream& operator<<(std::ostream& os,
       const Currency& c);
-
     // getters
     CurrencyUnits getCurrencyUnits();
 
