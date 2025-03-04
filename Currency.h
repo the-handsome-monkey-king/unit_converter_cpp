@@ -92,9 +92,13 @@ class Currency {
     friend std::ostream& operator<<(std::ostream& os,
       const Currency& c);
 
-    // try a map
+    // get an exchange rate
     double getExchangeRate(
       CurrencyUnits from, CurrencyUnits to);
+
+    // convert one currency to another
+    Currency getAs(CurrencyUnits newUnits);
+
 };
 
 #endif

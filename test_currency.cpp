@@ -11,7 +11,9 @@
 ************************/
 
 #include <string>
+#include <sstream>
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include "Currency.h"
 
@@ -73,6 +75,7 @@ class Test {
 
 int main(int argc, char *argv[]) {
 
+  // some sample Currency instances
   Currency cad = Currency(CurrencyUnits::CAD, 10.50);
   Currency usd = Currency(CurrencyUnits::USD, 11.50);
   Currency eur = Currency(CurrencyUnits::EUR, 12.50);
@@ -84,6 +87,7 @@ int main(int argc, char *argv[]) {
   Currency sek = Currency(CurrencyUnits::SEK, 18.50);
   Currency nzd = Currency(CurrencyUnits::NZD, 19.50);
 
+  // a vector to hold the Currency samples
   std::vector<Currency> money;
   money.push_back(cad);
   money.push_back(usd);
@@ -95,6 +99,13 @@ int main(int argc, char *argv[]) {
   money.push_back(cny);
   money.push_back(sek);
   money.push_back(nzd);
+
+  // a vector to hold all the CurrencyUnit values
+  std::vector<CurrencyUnits> currencyUnits = {
+    CurrencyUnits::CAD, CurrencyUnits::USD, CurrencyUnits::EUR, 
+    CurrencyUnits::JPY, CurrencyUnits::GBP, CurrencyUnits::AUD, 
+    CurrencyUnits::CHF, CurrencyUnits::CNY, CurrencyUnits::SEK, 
+    CurrencyUnits::NZD};
 
   // test cases 
   std::vector<std::string> cases = {
@@ -113,6 +124,151 @@ int main(int argc, char *argv[]) {
 
   // whitespace
   std::cout << std::endl << std::endl;
-    
+
+  // test exchange rate getters
+  cases.clear();
+   
+  // CAD to X
+  cases.push_back("1.0000");
+  cases.push_back("0.7600");
+  cases.push_back("0.6800");
+  cases.push_back("82.4300");
+  cases.push_back("0.6100");
+  cases.push_back("1.0900");
+  cases.push_back("0.7500");
+  cases.push_back("5.2600");
+  cases.push_back("7.1200");
+  cases.push_back("1.1400");
+  // USD to X
+  cases.push_back("1.3100");
+  cases.push_back("1.0000");
+  cases.push_back("0.8900");
+  cases.push_back("107.7400");
+  cases.push_back("0.7900");
+  cases.push_back("1.4200");
+  cases.push_back("0.9800");
+  cases.push_back("6.8800");
+  cases.push_back("9.3100");
+  cases.push_back("1.4900");
+  // EUR to X
+  cases.push_back("1.4800");
+  cases.push_back("1.1300");
+  cases.push_back("1.0000");
+  cases.push_back("121.6000");
+  cases.push_back("0.9000");
+  cases.push_back("1.6000");
+  cases.push_back("1.1100");
+  cases.push_back("7.7600");
+  cases.push_back("10.5100");
+  cases.push_back("1.6800");
+  // JPY to X
+  cases.push_back("0.0120");
+  cases.push_back("0.0093");
+  cases.push_back("0.0082");
+  cases.push_back("1.0000");
+  cases.push_back("0.0074");
+  cases.push_back("0.0130");
+  cases.push_back("0.0091");
+  cases.push_back("0.0640");
+  cases.push_back("0.0860");
+  cases.push_back("0.0140");
+  // GBP to X
+  cases.push_back("1.6400");
+  cases.push_back("1.2600");
+  cases.push_back("1.1100");
+  cases.push_back("135.4600");
+  cases.push_back("1.0000");
+  cases.push_back("1.7900");
+  cases.push_back("1.2400");
+  cases.push_back("8.6500");
+  cases.push_back("11.7000");
+  cases.push_back("1.8700");
+  // AUD to X
+  cases.push_back("0.9200");
+  cases.push_back("0.7000");
+  cases.push_back("0.6200");
+  cases.push_back("75.8100");
+  cases.push_back("0.5600");
+  cases.push_back("1.0000");
+  cases.push_back("0.6900");
+  cases.push_back("4.8400");
+  cases.push_back("6.5500");
+  cases.push_back("1.0500");
+  // CHF to X
+  cases.push_back("1.3300");
+  cases.push_back("1.0100");
+  cases.push_back("0.9000");
+  cases.push_back("109.3000");
+  cases.push_back("0.8100");
+  cases.push_back("1.4400");
+  cases.push_back("1.0000");
+  cases.push_back("6.9800");
+  cases.push_back("9.4400");
+  cases.push_back("1.5100");
+  // CNY to X
+  cases.push_back("0.1900");
+  cases.push_back("0.1500");
+  cases.push_back("0.1300");
+  cases.push_back("15.6600");
+  cases.push_back("0.1200");
+  cases.push_back("0.2100");
+  cases.push_back("0.1400");
+  cases.push_back("1.0000");
+  cases.push_back("1.3500");
+  cases.push_back("0.2200");
+  // SEK to X
+  cases.push_back("0.1400");
+  cases.push_back("0.1100");
+  cases.push_back("0.0950");
+  cases.push_back("11.5700");
+  cases.push_back("0.0850");
+  cases.push_back("0.1500");
+  cases.push_back("0.1100");
+  cases.push_back("0.7400");
+  cases.push_back("1.0000");
+  cases.push_back("0.1600");
+  // NZD to X
+  cases.push_back("0.8800");
+  cases.push_back("0.6700");
+  cases.push_back("0.5900");
+  cases.push_back("72.3300");
+  cases.push_back("0.5300");
+  cases.push_back("0.9500");
+  cases.push_back("0.6600");
+  cases.push_back("4.6200");
+  cases.push_back("4.6200");
+  cases.push_back("1.0000");
+
+
+  // get test class for exchange rates
+  Test test_rates(cases, "getExchangeRate()");
+
+  // load results into test class
+  for(Currency account : money) {
+    // for each account
+    // for each existing type of currency
+    for(CurrencyUnits cu : currencyUnits) {
+      // get individual exchange rate
+      double d = account.getExchangeRate(account.getCurrencyUnits(), cu);
+
+      // convert rate into string
+      std::stringstream ss;
+      ss << std::fixed << std::setprecision(4) << d;
+
+      // add resulting string to cases
+      test_rates.add_result(ss.str());
+      /*
+      std::cout << account << std::endl;
+      std::cout << "Exchange rate to " << account.currencyName.at(cu);
+      std::cout << ": " << ss.str() << std::endl;
+      */
+    }
+  }
+
+  // run test
+  test_rates.run();
+
+  // whitespace
+  std::cout << std::endl << std::endl;
   return 0;
 }

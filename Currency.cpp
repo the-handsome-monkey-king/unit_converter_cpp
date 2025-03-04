@@ -227,8 +227,7 @@ std::string Currency::getString() {
   return ss.str();
 }
 
-std::ostream& operator<<(std::ostream& os,
-  const Currency& c) {
+std::ostream& operator<<(std::ostream& os,const Currency& c) {
     // get units as string
     // use find() to preserve const Currency reference
     std::string cn = Currency::currencyName.find(c.units)->second;
@@ -246,16 +245,23 @@ std::ostream& operator<<(std::ostream& os,
       if (temp < 9) {
         os << "0";
       }
-        
     }
 
     os << std::endl;
     return os;
 }
 
-double Currency::getExchangeRate(
-  CurrencyUnits from, CurrencyUnits to) {
-  double d = Currency::Exchange.at(from).at(from);
+double Currency::getExchangeRate(CurrencyUnits from, CurrencyUnits to) {
+  double d = Currency::Exchange.at(from).at(to);
   return d;
 }
+
+
+Currency Currency::getAs(CurrencyUnits newUnits) {
+  double factor = this->getExchangeRate(this->units, newUnits);
+  double d = this->amt * factor;
+  Currency exchanged = Currency(newUnits, d);
+  return exchanged;
+}
+
 
