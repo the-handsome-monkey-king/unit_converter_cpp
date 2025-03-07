@@ -18,6 +18,7 @@
 
 int main(int argc, char *argv[]) {
   UnitConverter uc;
+  CurrencyExchangeRates cer;
 
   // variables for testing
   double amount = 100.0f;
@@ -28,20 +29,20 @@ int main(int argc, char *argv[]) {
   std::cout << "--- Testing curency exchange ---" << std::endl;
   
   // convert all currencies to all currencies
-  for(unsigned int i = 0; i < allCurrencyUnits.size(); i++) {
-    for(unsigned int j = 0; j < allCurrencyUnits.size(); j++) {
+  for(unsigned int i = 0; i < cer.ALL_UNITS.size(); i++) {
+    for(unsigned int j = 0; j < cer.ALL_UNITS.size(); j++) {
       // get units
-      CurrencyUnits fromUnits = allCurrencyUnits[i];
-      CurrencyUnits toUnits = allCurrencyUnits[j];
+      CurrencyUnits fromUnits = cer.ALL_UNITS[i];
+      CurrencyUnits toUnits = cer.ALL_UNITS[j];
 
       // class results
-      double cr = uc.exchangeCurrency(fromUnits, toUnits, amount);
-      class_results.push_back(cr);
+      double c_result = uc.exchangeCurrency(fromUnits, toUnits, amount);
+      class_results.push_back(c_result);
 
       // local results
-      double rate = EXCHANGE.at(fromUnits).at(toUnits);
-      double lr = amount * rate;
-      local_results.push_back(lr);
+      double rate = cer.EXCHANGE_RATES.at(fromUnits).at(toUnits);
+      double l_result = amount * rate;
+      local_results.push_back(l_result);
     }
   }
 
