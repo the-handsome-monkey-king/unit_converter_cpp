@@ -12,6 +12,7 @@
 #ifndef MASS_H
 #define MASS_H
 
-enum class MassUnits {};
+// STUB
+enum class MassUnits {GRAM};
 
-#endif MASS_H
+#endif 

@@ -17,6 +17,7 @@
 #define EXCHANGERATES_H
 
 #include <map>
+#include <vector>
 #include <string>
 
 // Currency symbols
@@ -24,8 +25,21 @@ enum class CurrencyUnits {
   CAD, USD, EUR, JPY, GBP,
   AUD, CHF, CNY, SEK, NZD};
 
+// vector for fast iteration
+std::vector<CurrencyUnits> allCurrencyUnits = {
+  CurrencyUnits::CAD, 
+  CurrencyUnits::USD, 
+  CurrencyUnits::EUR, 
+  CurrencyUnits::JPY, 
+  CurrencyUnits::GBP,
+  CurrencyUnits::AUD, 
+  CurrencyUnits::CHF, 
+  CurrencyUnits::CNY, 
+  CurrencyUnits::SEK, 
+  CurrencyUnits::NZD};
+
 // strings of currency names
-const std::map<CurrencyUnits, std::string> currencyName = {
+const std::map<CurrencyUnits, std::string> currencyNames = {
   {CurrencyUnits::CAD, "CAD"},
   {CurrencyUnits::USD, "USD"},
   {CurrencyUnits::EUR, "EUR"},
@@ -162,7 +176,7 @@ const std::map<CurrencyUnits, double> NZDexchange = {
 
 // map<FROM UNITS, map<TO UNITS, EXCHANGE RATE>>
 const std::map<CurrencyUnits,
-  const std::map<CurrencyUnits, double>> Exchange = {
+  const std::map<CurrencyUnits, double>> EXCHANGE = {
     { CurrencyUnits::CAD, CADexchange},
     { CurrencyUnits::USD, USDexchange},
     { CurrencyUnits::EUR, EURexchange},

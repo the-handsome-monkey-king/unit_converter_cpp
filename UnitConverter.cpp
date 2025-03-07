@@ -11,11 +11,13 @@
 
 #include "UnitConverter.h"
 
+UnitConverter::UnitConverter() {}
+
 double UnitConverter::exchangeCurrency(
   CurrencyUnits fromUnits, CurrencyUnits toUnits, double amount) {
 
     // get exchange rate
-    double rate = Exchange.at(fromUnits).at(toUnits);
+    double rate = EXCHANGE.at(fromUnits).at(toUnits);
 
     // convert amount
     return amount * rate;

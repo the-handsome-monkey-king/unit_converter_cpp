@@ -12,6 +12,7 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
-enum class VolUnits {};
+// STUB
+enum class VolUnits {LITRE};
 
-#endif VOLUME_H
+#endif 

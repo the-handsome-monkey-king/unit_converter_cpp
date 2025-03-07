@@ -12,6 +12,6 @@
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
 
-enum class TempUnits {};
+enum class TempUnits {K};
 
-#endif TEMPERATURE_H
+#endif 
