@@ -8,7 +8,7 @@
 
 OBJ = UnitConverter.o test.o
 DEPS = UnitConverter.o
-FLAGS = -Wall 
+FLAGS = -Wall -Wno-psabi
 CC = g++
 .SUFFIXES: .cpp .o
 
