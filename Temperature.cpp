@@ -7,38 +7,40 @@
 
   Implementation of Temperature.h
 
+  Conversion rates (from Wikipedia)
+  K = C + 273.15
+  K = (F + 459.67) * (5/9)
+  C = K - 273.15
+  C = (F - 32) * (5/9)
+  F = K * (9/5) - 459.67
+  F = C * (9/5) + 32
+
 *************************************************/
 
 #include "Temperature.h"
 
 double Temperature::K_to_C(double measure) {
-  //stub
-  return 0.0f;
+  return measure - 273.15f;
 }
 
 double Temperature::K_to_F(double measure) {
-  //stub
-  return 0.0f;
+  return (measure * 9.0f / 5.0f) - 459.67f;
 }
 
 double Temperature::C_to_K(double measure) {
-  //stub
-  return 0.0f;
+  return measure + 273.15f;
 }
 
 double Temperature::C_to_F(double measure) {
-  //stub
-  return 0.0f;
+  return (measure * 9.0f / 5.0f) + 32.0f;
 }
 
 double Temperature::F_to_K(double measure) {
-  //stub
-  return 0.0f;
+  return (measure + 459.67f) * 5.0f / 9.0f;
 }
 
 double Temperature::F_to_C(double measure) {
-  //stub
-  return 0.0f;
+  return (measure - 32.0f) * 5.0f / 9.0f;
 }
 
 double Temperature::convert(TempUnits from, TempUnits to, double measure) {
