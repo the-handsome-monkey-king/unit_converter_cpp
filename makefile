@@ -5,6 +5,7 @@
 #
 # compiled on a raspberry pi running gcc 7.1, so 
 # disabled warnings for 6 & earlier compiler warnings
+#
 
 OBJ = CurrencyExchangeRates.o Temperature.o UnitConverter.o test.o
 DEPS = CurrencyExchangeRates.o Temperature.o UnitConverter.o
