@@ -31,25 +31,25 @@ class UnitConverter {
     UnitConverter();
 
     // currency
-   double exchangeCurrency(
+   double convertCurrency(
       CurrencyUnits fromUnits,
       CurrencyUnits toUnits,
       double amount);
 
   // temperature
-  double exchangeTemp(
+  double convertTemp(
     TempUnits fromUnits,
     TempUnits toUnits,
     double measure);
 
   // volume
-  double exchangeVolume(
+  double convertVolume(
     VolUnits fromUnits,
     VolUnits toUnits,
     double measure);
 
   // mass
-  double exchangeMass(
+  double convertMass(
     MassUnits fromUnits,
     VolUnits toUnits,
     double measure);

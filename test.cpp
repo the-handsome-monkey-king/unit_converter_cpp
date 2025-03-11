@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
       CurrencyUnits toUnits = cer.ALL_UNITS[j];
 
       // class results
-      double c_result = uc.exchangeCurrency(fromUnits, toUnits, amount);
+      double c_result = uc.convertCurrency(fromUnits, toUnits, amount);
       class_results.push_back(c_result);
 
       // local results
@@ -58,10 +58,6 @@ int main(int argc, char *argv[]) {
       std::cout << "Result: " << class_results[i] <<std::endl;
     }
   }
-
-  // cleanup currency exchange
-  local_results.clear();
-  class_results.clear();
 
   // TEST TEMPERATURE
   std::cout << "--- Testing Temperature ---" << std::endl;
@@ -85,13 +81,20 @@ int main(int argc, char *argv[]) {
   std::vector<double> k_from_f;
   std::vector<double> c_from_k;
   std::vector<double> f_from_k;
-  // class results
-  std::vector<double> class_f_from_c;
-  std::vector<double> class_k_from_c;
-  std::vector<double> class_c_from_k;
-  std::vector<double> class_f_from_k;
-  std::vector<double> class_k_from_f;
-  std::vector<double> class_c_from_f;
+  // Temperature class results
+  std::vector<double> tclass_f_from_c;
+  std::vector<double> tclass_k_from_c;
+  std::vector<double> tclass_c_from_k;
+  std::vector<double> tclass_f_from_k;
+  std::vector<double> tclass_k_from_f;
+  std::vector<double> tclass_c_from_f;
+  // UnitConverter class results
+  std::vector<double> ucclass_f_from_c;
+  std::vector<double> ucclass_k_from_c;
+  std::vector<double> ucclass_c_from_k;
+  std::vector<double> ucclass_f_from_k;
+  std::vector<double> ucclass_k_from_f;
+  std::vector<double> ucclass_c_from_f;
 
   /*
     for a math check - an option could be added to this to run in verbose mode
@@ -100,6 +103,7 @@ int main(int argc, char *argv[]) {
   std::cout << "[input] -> [wiki] [actual]" << std::endl;
   */
 
+  // get results
   for(unsigned int i = 0; i < c_temps.size(); i++) {
     // inputs
     double c = c_temps[i];
@@ -145,9 +149,88 @@ int main(int argc, char *argv[]) {
     f_from_k.push_back(f_result_from_k);
     f_from_c.push_back(f_result_from_c);
 
-    // test local results against Temperature class results
+    // store Temperature class results
+    tclass_f_from_c.push_back(temp.convert(TempUnits::C, TempUnits::F, c));
+    tclass_k_from_c.push_back(temp.convert(TempUnits::C, TempUnits::K, c));
+    tclass_c_from_k.push_back(temp.convert(TempUnits::K, TempUnits::C, k));
+    tclass_f_from_k.push_back(temp.convert(TempUnits::K, TempUnits::F, k));
+    tclass_k_from_f.push_back(temp.convert(TempUnits::F, TempUnits::K, f));
+    tclass_c_from_f.push_back(temp.convert(TempUnits::F, TempUnits::C, f));
 
-    // test local results against UnitConverter class results
+    // store UnitConverter class results 
+    ucclass_f_from_c.push_back(uc.convertTemp(TempUnits::C, TempUnits::F, c));
+    ucclass_k_from_c.push_back(uc.convertTemp(TempUnits::C, TempUnits::K, c));
+    ucclass_c_from_k.push_back(uc.convertTemp(TempUnits::K, TempUnits::C, k));
+    ucclass_f_from_k.push_back(uc.convertTemp(TempUnits::K, TempUnits::F, k));
+    ucclass_k_from_f.push_back(uc.convertTemp(TempUnits::F, TempUnits::K, f));
+    ucclass_c_from_f.push_back(uc.convertTemp(TempUnits::F, TempUnits::C, f));
+  }
+
+  // compare results
+  bool tempPass = false;
+  bool ucPass = false;
+  
+  // test Temperature class results
+  if(f_from_c == tclass_f_from_c && k_from_c == tclass_k_from_c &&
+    c_from_f == tclass_c_from_f && k_from_f == tclass_k_from_f &&
+    c_from_k == tclass_c_from_k && f_from_k == tclass_f_from_k)
+  {
+    tempPass = true;
+  } 
+
+  if(tempPass) {
+    std::cout << "Temperature class: Passed" << std::endl;
+  } else {
+    std::cout << "Temperature class: Failed" << std::endl;
+    if(f_from_c != tclass_f_from_c) {
+      std::cout << "Failed: C to F" << std::endl;
+    }
+    if(k_from_c != tclass_k_from_c) {
+      std::cout << "Failed: C to K" << std::endl;
+    }
+    if(c_from_f != tclass_c_from_f) {
+      std::cout << "Failed: F to C" << std::endl;
+    }
+    if(k_from_f != tclass_k_from_f) {
+      std::cout << "Failed: F to K" << std::endl;
+    }
+    if(c_from_k != tclass_c_from_k) {
+      std::cout << "Failed: K to C" << std::endl;
+    }
+    if(f_from_k != tclass_f_from_k) {
+      std::cout << "Failed: K to F" << std::endl;
+    }
+  }
+
+  if(f_from_c == ucclass_f_from_c && k_from_c == tclass_k_from_c &&
+    c_from_f == ucclass_c_from_f && k_from_f == tclass_k_from_f &&
+    c_from_k == ucclass_c_from_k && f_from_k == tclass_f_from_k)
+  {
+    ucPass = true;
+  } 
+
+  if(ucPass) {
+    std::cout << "UnitConverter class: Passed" << std::endl;
+  } else {
+    std::cout << "UnitConverter class: Failed" << std::endl;
+    if(f_from_c != ucclass_f_from_c) {
+      std::cout << "Failed: C to F" << std::endl;
+    }
+    if(k_from_c != ucclass_k_from_c) {
+      std::cout << "Failed: C to K" << std::endl;
+    }
+    if(c_from_f != ucclass_c_from_f) {
+      std::cout << "Failed: F to C" << std::endl;
+    }
+    if(k_from_f != ucclass_k_from_f) {
+      std::cout << "Failed: F to K" << std::endl;
+    }
+    if(c_from_k != ucclass_c_from_k) {
+      std::cout << "Failed: K to C" << std::endl;
+    }
+    if(f_from_k != ucclass_f_from_k) {
+      std::cout << "Failed: K to F" << std::endl;
+    }
   }
 
   // TEST VOLUME

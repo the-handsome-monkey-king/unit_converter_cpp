@@ -13,7 +13,7 @@
 
 UnitConverter::UnitConverter() {}
 
-double UnitConverter::exchangeCurrency(
+double UnitConverter::convertCurrency(
   CurrencyUnits fromUnits, CurrencyUnits toUnits, double amount) {
 
     CurrencyExchangeRates cer;
@@ -22,4 +22,10 @@ double UnitConverter::exchangeCurrency(
 
     // convert amount
     return amount * rate;
+}
+
+double UnitConverter::convertTemp(TempUnits fromUnits, 
+  TempUnits toUnits, double measure) {
+    Temperature temp;
+    return temp.convert(fromUnits, toUnits, measure);
 }
