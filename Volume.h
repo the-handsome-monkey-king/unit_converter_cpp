@@ -70,7 +70,19 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
-// STUB
-enum class VolUnits {LITRE};
+#include <map>
+#include <string>
 
+// STUB
+enum class VolUnits {
+  SI_KILO_LITRE, SI_HECA_LITRE, SI_DECA_LITRE, SI_LITRE, 
+  SI_DECI_LITRE, SI_CENTI_LITRE, SI_MILI_LITRE, 
+  IMP_OZ, IMP_GI, IMP_PT, IMP_GAL, 
+  US_JIG, US_GI, US_CUP, US_PINT, US_QUART, US_POTTLE, US_GALLON};
+
+class Volume {
+  public:
+    static const std::map<VolUnits, std::string> UNIT_NAMES;
+    static double convert(VolUnits from, VolUnits to);
+};
 #endif 
