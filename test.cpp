@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
   UnitConverter uc;
   CurrencyExchangeRates cer;
   Temperature temp;
+  Volume vol;
 
   // variables for testing
   double amount = 100.0f;
@@ -234,6 +235,50 @@ int main(int argc, char *argv[]) {
   }
 
   // TEST VOLUME
+
+  std::cout << "--- Testing Volume ---" << std::endl;
+
+  // system memebership tests
+
+  // get class results
+  std::vector<bool> is_si;
+  std::vector<bool> is_imp;
+  std::vector<bool> is_us;
+  for(unsigned int i = 0; i < Volume::ALL_UNITS.size(); i++) {
+    VolUnits unit = Volume::ALL_UNITS[i];
+    is_si.push_back(vol.is_unit_si(unit));
+    is_imp.push_back(vol.is_unit_imp(unit));
+    is_us.push_back(vol.is_unit_us(unit));
+  }
+
+  // test against test cases
+  bool pass_membership_test = true;
+  for(unsigned int i = 0; i < Volume::ALL_UNITS.size(); i++) {
+    if(i < 7) {
+      if(is_si[i] != true || is_imp[i] != false || is_us[i] != false) {
+        pass_membership_test = false;
+      }
+    } else if ( i < 11) {
+      if(is_si[i] != false || is_imp[i] != true || is_us[i] != false) {
+        pass_membership_test = false;
+      }
+    } else {
+      if(is_si[i] != false || is_imp[i] != false || is_us[i] != true) {
+        pass_membership_test = false;
+      }
+    }
+  }
+
+  std::cout << "System Membership Tests: ";
+  if(pass_membership_test) {
+    std::cout << "Passed" << std::endl;
+  } else {
+    std::cout << "Failed" << std::endl;
+  }
+
+
+
+
   // TEST MASS
 
 

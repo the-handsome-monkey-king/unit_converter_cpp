@@ -70,8 +70,10 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
+#include <unordered_set>
 #include <map>
 #include <string>
+#include <vector>
 
 // STUB
 enum class VolUnits {
@@ -81,8 +83,40 @@ enum class VolUnits {
   US_JIG, US_GI, US_CUP, US_PINT, US_QUART, US_POTTLE, US_GALLON};
 
 class Volume {
+  private:
+    // system membership
+    static const std::unordered_set<VolUnits> SI_UNITS;
+    static const std::unordered_set<VolUnits> IMP_UNITS;
+    static const std::unordered_set<VolUnits> US_UNITS;
+
+
+    // si exponents
+    static const std::map<VolUnits, double> SI_EXPONENTS;
+
+    // within one system
+    static double si_to_si(VolUnits from, VolUnits to, double measure);
+    static double imp_to_imp(VolUnits from, VolUnits to, double measure);
+    static double us_to_us(VolUnits from, VolUnits to, double measure);
+    // between systems
+    static double si_to_imp(VolUnits from, VolUnits to, double measure);
+    static double si_to_us(VolUnits from, VolUnits to, double measure);
+    static double imp_to_si(VolUnits from, VolUnits to, double measure);
+    static double imp_to_us(VolUnits from, VolUnits to, double measure);
+    static double us_to_si(VolUnits from, VolUnits to, double measure);
+    static double us_to_imp(VolUnits from, VolUnits to, double measure);
   public:
+    // units as strings
     static const std::map<VolUnits, std::string> UNIT_NAMES;
-    static double convert(VolUnits from, VolUnits to);
+    // vector for iteraton
+    static const std::vector<VolUnits> ALL_UNITS;
+
+    // the primary method of this class
+    double convert(VolUnits from, VolUnits to, double measure);
+
+    // test memberships
+    const bool is_unit_si(VolUnits unit);
+    const bool is_unit_imp(VolUnits unit);
+    const bool is_unit_us(VolUnits unit);
+
 };
 #endif 

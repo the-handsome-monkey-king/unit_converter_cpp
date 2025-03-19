@@ -8,8 +8,8 @@
 #
 #
 
-OBJ = CurrencyExchangeRates.o Temperature.o UnitConverter.o test.o
-DEPS = CurrencyExchangeRates.o Temperature.o UnitConverter.o
+OBJ = Volume.o CurrencyExchangeRates.o Temperature.o UnitConverter.o test.o
+DEPS = Volume.o CurrencyExchangeRates.o Temperature.o UnitConverter.o
 FLAGS = -Wall -Wno-psabi
 CC = g++
 .SUFFIXES: .cpp .o
@@ -20,6 +20,9 @@ CC = g++
 all: $(OBJ)
 
 CurrencyExchangeRates.o: CurrencyExchangeRates.cpp 
+	$(CC) -c -o $@ $^ $(FLAGS)
+
+Volume.o: Volume.cpp 
 	$(CC) -c -o $@ $^ $(FLAGS)
 
 Temperature.o: Temperature.cpp 
